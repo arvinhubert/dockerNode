@@ -67,7 +67,6 @@ function pingHeartBeat(){
     .catch(err=>{
         console.error('pingHeartBeat heartbeat.json not found')
         logger.error('pingHeartBeat heartbeat.json not found');
-        viana.setHeartBeatData(heartbeatdata)
         hearbeatInProgress = false;
         setTimeout(pingHeartBeat, 60000);
     })
