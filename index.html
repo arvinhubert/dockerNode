@@ -1,0 +1,86 @@
+<!doctype html>
+<html>
+  <head>
+    <title> chat</title>
+
+    <!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+  </head>
+  <body>
+
+    <ul id="messages"></ul>
+    <form action="" id="chat">
+      <textarea id="m" autocomplete="off"></textarea> <button>Send</button>
+    </form>
+
+   <!--  <script src="/socket.io/socket.io.js"></script> -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.2.0/socket.io.js"></script>
+   
+     <script src="https://code.jquery.com/jquery-1.11.1.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+   
+    <script>
+
+
+      $(function () {
+
+        var options ={
+          transports: ['websocket'],
+          'force new connection': true,
+          protocol: 'quividi'
+        };
+        let socket = io('ws://127.0.0.1:2974');
+
+        console.log(socket)
+       
+        /* let userID = 'user'+Math.random()*100;
+        $.post("http://localhost:3001/users/login", {})
+        .then(response =>{
+          socket.emit('adduser', response.data.token);
+        })
+
+        socket.on('recieve socket id', function(user_id) {
+          console.log(user_id)
+          $.post("http://localhost:3001/contentcreation/birthday",{user_id})
+            .then(response =>{
+             // console.log(response)
+              $('#m').val('');
+            })
+        }) */
+        socket.emit('deviceLogs', {message:"hi"});
+        socket.on('devices', function(devices) {
+          console.log({devices})
+        }) 
+        socket.on('queueing_render', function(homeconfig) {
+          console.log(homeconfig)
+        }) 
+         socket.on('structure_socket', function(homeconfig) {
+          console.log(homeconfig)
+        })
+         socket.on('message', function(homeconfig) {
+          console.log(homeconfig)
+        })
+       /* $('form#chat').submit(function(){
+          socket.emit('gg', {message:$('#m').val()});
+          $('#m').val('');
+          return false;
+        });*/
+      $('form#chat').submit(function(){
+        
+          
+          
+          return false;
+        });
+        socket.on('content creation birthday', function(msg){
+          console.log('kini', msg)
+        });
+        socket.on('updatechat', function(username, message){
+          console.log(message)
+          $('#messages').append($('<li>').text(username +'=> \t'+message));
+        });
+
+      });
+    </script>
+  </body>
+</html>
