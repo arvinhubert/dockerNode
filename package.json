@@ -17,7 +17,7 @@
     "firebase-admin": "^8.9.1",
     "firestore-size": "^2.0.4",
     "json-server": "^0.15.1",
-    "moment": "^2.24.0",
+    "moment": "^2.29.2",
     "pm2": "^3.5.1",
     "pouchdb": "^7.2.1",
     "pouchdb-server": "^4.2.0",
